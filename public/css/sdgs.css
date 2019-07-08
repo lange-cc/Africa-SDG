@@ -1,0 +1,35 @@
+@import url(https://fonts.googleapis.com/css?family=Libre+Franklin:100,200,300,400,500,600,700,800,900);
+@import url(https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700);
+
+#sdgs_page {
+    background-color: #FAFAFA;
+}
+
+#sdgs_page .sdgs-heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-weight: bold;
+    background-color: #0F7292;
+    color: white;
+    padding: 3px;
+    font-size: 41px;
+}
+
+#sdgs_page .container {
+    padding: 10px 60px;
+}
+
+#sdgs_page .sdg-goals .sdgs-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap
+}
+
+#sdgs_page .goal-text {
+    font-family: Libre Franklin, sans-serif;
+}
+
+.goal-card-big {
+    float: right; margin-top: 120px; margin-left: 120px; margin-bottom: 120px; transform: scale(2.5);
+}

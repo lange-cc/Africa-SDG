@@ -1,0 +1,208 @@
+/*
+  CREATED by Abe jahwin
+  Saved in Css folder
+*/
+
+/* ===== Map section css ========== */
+.map-guide {
+    height: 650px;
+    padding-left: 20px;
+    padding-top: 59px;
+}
+
+.map-guide h1 {
+    color: #fac12c;
+    font-size: 55px;
+    font-weight: 800;
+    font-family: 'Libre Franklin', sans-serif;
+}
+.search-input
+{
+    width: 80%;
+    padding: 14px 46px;
+    border-radius: 10px;
+    border: 0;
+}
+.home-search-icon
+{
+    position: absolute;
+    left: 15px;
+    top: 13px;
+    font-size: 25px;
+    color: #a5a2a2;
+}
+.main-search-widget
+{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    position: relative;
+}
+.search-result-widget
+{
+    position: absolute;
+    background: #ededed;
+    left: 0;
+    right: 91px;
+    margin-top: 4px;
+    border-radius: 10px;
+    padding: 17px;
+    max-height: 320px;
+    overflow-y: auto;
+    transition:all 200ms ease-in;
+    z-index: 9999;
+    bottom: 62px;
+    box-shadow: 0px 0px 5px #969696;
+}
+.search-result-widget ul
+{
+    list-style: none;
+    /*margin-bottom: -9px !important;*/
+}
+.search-result-widget ul li
+{
+    margin-left: -55px;
+    padding-bottom: 12px;
+    cursor: pointer;
+    padding-top: 12px;
+    padding-left: 15px;
+    border-bottom: 2px solid #e0e0e0;
+    margin-right: -15px;
+}
+.search-result-widget ul li:hover
+{
+    background: #e6e6e6;
+}
+.search-widget-title
+{
+    padding: 10px 6px;
+    border-bottom: 4px solid #f6f6f6;
+}
+.search-overlay
+{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 99;
+}
+.map-guide h3 {
+    color: #fff;
+    font-size: 26px;
+    font-weight: 100;
+    margin-top: 18px;
+    font-family: 'Libre Franklin', sans-serif;
+}
+
+.map-n-b {
+    color: #fac12c;
+    font-size: 12px;
+    margin-bottom: 20px;
+    font-family: 'Libre Franklin', sans-serif;
+    margin-left: 25px;
+}
+
+.map-preview {
+    padding-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.annauncement {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 56px;
+    background: #0875ae;
+    color: #fff;
+    font-family: 'Libre Franklin', sans-serif;
+    padding-top: 7px
+}
+
+.annauncement h5 {
+    font-size: 17px !important;
+    font-family: 'Libre Franklin', sans-serif;
+    font-weight: 300;
+}
+
+#g22346 path:hover {
+    fill: #a31c43 !important;
+    cursor: pointer;
+    transition: 0.3s ease-in;
+}
+
+.map-tooltip {
+    height: 30px;
+    position: absolute;
+    background: #fac12c;
+    border: 3px solid #26bfe6;
+    top: 200px;
+    left: 400px;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 20px;
+    padding-right: 19px;
+    color: #164e66;
+    border-radius: 16px;
+    font-size: 15px;
+    display: none;
+}
+
+.Map-Controls {
+    display: flex;
+    width: 86px;
+    position: absolute;
+    z-index: 999;
+    top: 464px;
+    right: 44px;
+    justify-content: space-between;
+    background: #fff;
+    padding: 11px;
+    border-radius: 15px;
+}
+
+.Map-Controls .zoom-out, .Map-Controls .zoom-in {
+    border: 0;
+    cursor: pointer;
+}
+
+.Map-Controls .zoom-out {
+    background: #4da046;
+    color: #fff;
+    box-shadow: 1px 1px 3px #000;
+}
+
+.Map-Controls .zoom-in {
+    background: #4ecbea;
+    color: #fff;
+    box-shadow: 1px 1px 3px #000;
+}
+.search-widget-title img
+{
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

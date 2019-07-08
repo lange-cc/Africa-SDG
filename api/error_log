@@ -1,0 +1,18 @@
+[28-Feb-2019 07:57:25 America/Chicago] PHP Fatal error:  Uncaught BadMethodCallException: Call to undefined method Illuminate\Database\Query\Builder::exist() in /home/africasd/public_html/api/config/vendor/illuminate/database/Query/Builder.php:2445
+Stack trace:
+#0 /home/africasd/public_html/api/models/home_model.php(15): Illuminate\Database\Query\Builder->__call('exist', Array)
+#1 /home/africasd/public_html/api/controllers/home.php(27): home_model->yearExist('2019', 'en')
+#2 /home/africasd/public_html/api/libs/route.php(63): home->autoload()
+#3 /home/africasd/public_html/api/libs/route.php(22): Route->loadsite(Array)
+#4 /home/africasd/public_html/api/index.php(22): Route->__construct()
+#5 {main}
+  thrown in /home/africasd/public_html/api/config/vendor/illuminate/database/Query/Builder.php on line 2445
+[28-Feb-2019 07:57:25 America/Chicago] PHP Fatal error:  Uncaught BadMethodCallException: Call to undefined method Illuminate\Database\Query\Builder::exist() in /home/africasd/public_html/api/config/vendor/illuminate/database/Query/Builder.php:2445
+Stack trace:
+#0 /home/africasd/public_html/api/models/home_model.php(15): Illuminate\Database\Query\Builder->__call('exist', Array)
+#1 /home/africasd/public_html/api/controllers/home.php(27): home_model->yearExist('2019', 'en')
+#2 /home/africasd/public_html/api/libs/route.php(63): home->autoload()
+#3 /home/africasd/public_html/api/libs/route.php(22): Route->loadsite(Array)
+#4 /home/africasd/public_html/api/index.php(22): Route->__construct()
+#5 {main}
+  thrown in /home/africasd/public_html/api/config/vendor/illuminate/database/Query/Builder.php on line 2445

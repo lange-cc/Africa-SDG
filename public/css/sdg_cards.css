@@ -1,0 +1,94 @@
+@import url(https://fonts.googleapis.com/css?family=Libre+Franklin:100,200,300,400,500,600,700,800,900);
+@import url(https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700);
+
+.sdg-goal-card {
+    width: 112px;
+    height: 112px;
+    padding: 3px;
+    border: 2px solid #f3f3f3;
+    box-sizing: border-box;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+    background-color: white;
+}
+.sdg-goal-card-big{
+    width: 112px;
+    height: 112px;
+    padding: 3px;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+    background-color: white;
+    float: right;
+    margin: 89px 95px 100px 142px;
+    transform: scale(2.5);
+}
+.sdg-goal-card:hover {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+    -moz-transition-timing-function: ease-in;
+    -ms-transition-timing-function: ease-in;
+    -o-transition-timing-function: ease-in;
+    transition-timing-function: ease-in;
+    cursor: pointer;
+}
+
+.sdg-goal-card *,.sdg-goal-card-big * {
+    font-family: Oswald, sans-serif;
+    text-transform: uppercase;
+    box-sizing: border-box;
+    color: white;
+}
+
+.sdg-goal-card .header,.sdg-goal-card-big .header {
+    display: flex;
+    flex-direction: row;
+}
+
+.sdg-goal-card .header .number,.sdg-goal-card-big .header .number{
+    font-size: 24px;
+    line-height: 0.7;
+    margin-top: 7px;
+}
+
+.sdg-goal-card .header .name,.sdg-goal-card-big .header .name{
+    line-height: 1.1;
+    font-weight: 700;
+    font-size: 8.5px !important;
+    margin-top: 7px;
+    margin-left: 5px;
+}
+
+.sdg-goal-card .body,.sdg-goal-card-big .body{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-top: 4px;
+    padding-bottom: 5px;
+
+}
+
+
+/* Every picture size */
+.sdg-goal-card .body img.image-ht-70,.sdg-goal-card-big .body img.image-ht-70{
+    height: 70px;
+    /* margin-top: -3px; */
+}
+
+.sdg-goal-card .body img.image-ht-60,.sdg-goal-card-big .body img.image-ht-60{
+    height: 60px;
+}
+
+.sdg-goal-card .body img.image-ht-80,.sdg-goal-card-big .body img.image-ht-80{
+    height: 80px;
+}
+
+.sdg-goal-card .body img.image-ht-110,.sdg-goal-card-big .body img.image-ht-110{
+    height: 110px;
+    margin-top: -12px;
+}

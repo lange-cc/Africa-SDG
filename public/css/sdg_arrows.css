@@ -1,0 +1,121 @@
+@import url(https://fonts.googleapis.com/css?family=Libre+Franklin:100,200,300,400,500,600,700,800,900);
+@import url(https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700);
+
+/*
+SDG Arrow css
+*/
+.sdg-arrow-box {
+    width: 112px;
+    height: 112px;
+    background-color: #fff;
+    transition: all .3s ease-out;
+    border: 2px solid #f3f3f3;
+}
+
+.sdg-arrow-box:hover {
+    z-index: 2;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.sdg-arrow-box .upper-part {
+    height: 20px;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+.sdg-arrow-box .upper-part .sdg-score {
+    font-size: 25px !important;
+    font-weight: bold;
+    font-family: Oswald, sans-serif;
+    line-height: 0.8 !important;
+}
+
+.sdg-arrow-box .upper-part .sdg-name {
+    font-family: Oswald, sans-serif;
+    font-size: 8.5px !important;
+    line-height: 10px !important;
+    margin-left: 5px;
+    text-transform: uppercase;
+}
+
+.sdg-arrow-box .sdg-arrow {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 27px;
+    font-weight: 800;
+}
+
+.sdg-arrow-box .sdg-arrow i.fa-long-arrow-right {
+    -webkit-transform: scale(3, 3);
+    -moz-transform: scale(3, 3);
+    -ms-transform: scale(3, 3);
+    -o-transform: scale(3, 3);
+    transform: scale(3, 3);
+}
+
+.sdg-arrow-box .sdg-arrow i.fa-long-arrow-right.rotate-45 {
+    -webkit-transform: rotate(325deg) scale(3, 3);
+    -moz-transform: rotate(325deg) scale(3, 3);
+    -ms-transform: rotate(325deg) scale(3, 3);
+    -o-transform: rotate(325deg) scale(3, 3);
+    transform: rotate(325deg) scale(3, 3);
+}
+
+
+.sdg-arrow-box .sdg-arrow i.fa-long-arrow-right.flat {
+    -webkit-transform: scale(1.5, 1.8);
+    -moz-transform: scale(1.5, 1.8);
+    -ms-transform: scale(1.5, 1.8);
+    -o-transform: scale(1.5, 1.8);
+    transform: scale(1.5, 1.8);
+    color: #e5873c !important;
+}
+
+.sdg-arrow-box .sdg-arrow i.fa-long-arrow-right.maintaining {
+    -webkit-transform: scale(1.5, 1.8);
+    -moz-transform: scale(1.5, 1.8);
+    -ms-transform: scale(1.5, 1.8);
+    -o-transform: scale(1.5, 1.8);
+    transform: scale(1.5, 1.8);
+    color: #61ac56 !important;
+}
+
+.sdg-arrow-box .sdg-arrow i.fa-circle {
+    -webkit-transform: scale(0.6, 0.6);
+    -moz-transform: scale(0.6, 0.6);
+    -ms-transform: scale(0.6, 0.6);
+    -o-transform: scale(0.6, 0.6);
+    transform: scale(0.6, 0.6);
+    color: #939598 !important;
+}
+
+.sdg-arrow-box .sdg-arrow i.fa-long-arrow-right.rotate-45 {
+    -webkit-transform: rotate(325deg) scale(1.5, 1.8);
+    -moz-transform: rotate(325deg) scale(1.5, 1.8);
+    -ms-transform: rotate(325deg) scale(1.5, 1.8);
+    -o-transform: rotate(325deg) scale(1.5, 1.8);
+    transform: rotate(325deg) scale(1.5, 1.8);
+    color: #f0ca47 !important;
+}
+
+.sdg-arrow-box .sdg-arrow i.fa-long-arrow-right.rotate-270 {
+    -webkit-transform: rotate(90deg) scale(1.5, 1.8);
+    -moz-transform: rotate(90deg) scale(1.5, 1.8);
+    -ms-transform: rotate(90deg) scale(1.5, 1.8);
+    -o-transform: rotate(90deg) scale(1.5, 1.8);
+    transform: rotate(90deg) scale(1.5, 1.8);
+    color: red !important;
+}
+
+.sdg-arrow-box .sdg-arrow i.fa-long-arrow-right.rotate-90 {
+    -webkit-transform: rotate(270deg) scale(1.5, 1.8);
+    -moz-transform: rotate(270deg) scale(1.5, 1.8);
+    -ms-transform: rotate(270deg) scale(1.5, 1.8);
+    -o-transform: rotate(270deg) scale(1.5, 1.8);
+    transform: rotate(270deg) scale(1.5, 1.8);
+    color: #61ac56 !important;
+}

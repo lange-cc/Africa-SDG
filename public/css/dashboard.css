@@ -1,0 +1,315 @@
+@import url(https://fonts.googleapis.com/css?family=Libre+Franklin:100,200,300,400,500,600,700,800,900);
+@import url(https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700);
+#sdg-dashboard
+{
+    padding-top:182px
+}
+#sdg-dashboard .continent-parts-tabs {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 109px;
+    overflow-x: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0f7292;
+    z-index: 999;
+}
+.goals-names
+{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 172px;
+    box-shadow: 0px 1px 2px #ccc;
+    background: #fff;
+    z-index: 99;
+}
+
+#sdg-dashboard .continent-parts-tabs ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    background-color: #0F7292;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 828px;
+}
+
+#sdg-dashboard .continent-parts-tabs ul li {
+    padding: 17px 24px 22px 24px;
+    color: white;
+    cursor: pointer;
+}
+
+#sdg-dashboard .continent-parts-tabs ul li.active {
+    background-color: white;
+    color: #0F7292;
+    font-weight: bold;
+    transition: 200ms ease-in;
+}
+
+#sdg-dashboard .continent-parts-tabs ul li:hover:not(.active) {
+    background-color: white;
+    color: #0F7292;
+    text-transform: capitalize;
+    transition: 100ms ease-in;
+    border-left: 4px solid #e6e8ea;
+}
+.continent-parts-tabs-content{
+    background-color: #FAFAFA;
+}
+.continent-parts-tabs-content .countries-table {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.continent-parts-tabs-content thead tr, .continent-parts-tabs-content tbody tr {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.continent-parts-tabs-content .goals-names tr th:not(:first-child) {
+    border-left: 1px solid #f0f0f0;
+    width: 62px;
+}
+
+.continent-parts-tabs-content .goals-names tr th {
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
+    overflow-x: hidden;
+}
+
+.goals-names tr.names th {
+    font-size: 7px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 70px;
+    text-transform: uppercase;
+}
+
+.goals-names tr.counters th {
+    margin-top: 10px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.continent-parts-tabs-content .countries-table tbody tr td:not(:first-child) {
+    width: 62px !important;
+    text-align: center;
+}
+
+.continent-parts-tabs-content .countries-table tbody tr td:first-child,
+.continent-parts-tabs-content .goals-names tr th:first-child {
+    width: 97px !important;
+    line-height: 0.9;
+    text-align: right;
+}
+
+.continent-parts-tabs-content .countries-table tbody tr td:first-child a {
+    font-weight: bold;
+    color: black;
+    font-size: 9px;
+    /*display: block;*/
+}
+
+.continent-parts-tabs-content .countries-table tbody .goal-box {
+    width: 58px !important;
+    height: 41px;
+    border-radius: 8px;
+    margin: 2px;
+    cursor: pointer;
+}
+
+.color-yellow {
+    color: #f0ca47;
+}
+
+.color-yellow-1 {
+    color: #f69f2f;
+}
+
+.color-yellow-2 {
+    color: #be8e2d;
+}
+
+.color-green {
+    color: #61ac56;
+}
+
+.color-green-1 {
+    color: #3f8044;
+}
+
+.color-green-2 {
+    color: #66b245;
+}
+
+.color-orange {
+    color: #e5873c !important;
+}
+
+.color-red {
+    color: #e5233d !important;
+}
+
+.color-red-2 {
+    color: #c52034;
+}
+
+.color-red-3 {
+    color: #e84931;
+}
+
+.color-red-4 {
+    color: #a21c46;
+}
+
+.color-red-5 {
+    color: #dc166a;
+}
+
+.color-orange-1 {
+    color: #ed7032;
+}
+
+.color-blue {
+    color: #27bfe5;
+}
+
+.color-blue-1 {
+    color: #2195d0;
+}
+
+.color-blue-2 {
+    color: #136e9d;
+}
+
+.color-blue-3 {
+    color: #0b4a68;
+}
+
+/*
+SDG trends Arrows CSS
+ */
+.goal-box .sdg-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.goal-box .sdg-arrow i.fa-long-arrow-right.flat {
+    -webkit-transform: scale(1.5, 1.8);
+    -moz-transform: scale(1.5, 1.8);
+    -ms-transform: scale(1.5, 1.8);
+    -o-transform: scale(1.5, 1.8);
+    transform: scale(1.5, 1.8);
+    color: #e5873c !important;
+}
+.goal-box .sdg-arrow i.fa-long-arrow-right.maintaining {
+    -webkit-transform: scale(1.5, 1.8);
+    -moz-transform: scale(1.5, 1.8);
+    -ms-transform: scale(1.5, 1.8);
+    -o-transform: scale(1.5, 1.8);
+    transform: scale(1.5, 1.8);
+    color: #61ac56 !important;
+}
+.goal-box .sdg-arrow i.fa-circle {
+    -webkit-transform: scale(1, 1);
+    -moz-transform: scale(1.5, 1.8);
+    -ms-transform: scale(1.5, 1.8);
+    -o-transform: scale(1.5, 1.8);
+    transform: scale(0.6, 0.6);
+    color: #939598 !important;
+}
+
+.goal-box .sdg-arrow i.fa-long-arrow-right.rotate-45 {
+    -webkit-transform: rotate(325deg) scale(1.5, 1.8);
+    -moz-transform: rotate(325deg) scale(1.5, 1.8);
+    -ms-transform: rotate(325deg) scale(1.5, 1.8);
+    -o-transform: rotate(325deg) scale(1.5, 1.8);
+    transform: rotate(325deg) scale(1.5, 1.8);
+    color: #f0ca47 !important;
+}
+
+.goal-box .sdg-arrow i.fa-long-arrow-right.rotate-270 {
+    -webkit-transform: rotate(90deg) scale(1.5, 1.8);
+    -moz-transform: rotate(90deg) scale(1.5, 1.8);
+    -ms-transform: rotate(90deg) scale(1.5, 1.8);
+    -o-transform: rotate(90deg) scale(1.5, 1.8);
+    transform: rotate(90deg) scale(1.5, 1.8);
+    color: red !important;
+}
+
+.goal-box .sdg-arrow i.fa-long-arrow-right.rotate-90 {
+    -webkit-transform: rotate(270deg) scale(1.5, 1.8);
+    -moz-transform: rotate(270deg) scale(1.5, 1.8);
+    -ms-transform: rotate(270deg) scale(1.5, 1.8);
+    -o-transform: rotate(270deg) scale(1.5, 1.8);
+    transform: rotate(270deg) scale(1.5, 1.8);
+    color: #61ac56 !important;
+}
+
+.sdg-ranking-table tbody.trends-body td:not(:first-child) {
+    border-top: 2px solid rgba(0, 0, 0, 0.2);
+}
+.sdg-ranking-table tbody.trends-body tr:last-child td:not(:first-child) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.sdg-ranking-table .goal-box
+{
+    height: 28px !important;
+    border-radius: 6px !important;
+}
+.trends-body tr td .fa
+{
+    z-index: 1;
+}
+.goal-box .sdg-arrow span{
+  width: 0 !important;
+}
+
+.sdg-ranking-table tbody td {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.sdg-ranking-table tbody td:first-child {
+    align-items: flex-end;
+    word-break: keep-all;
+}
+.ranking-country-name
+{
+    cursor: pointer;
+    padding-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+
+.sdg-notes p{
+  margin-top: 25px;
+  margin-bottom: 100px;
+    font-size: 13px;
+    text-align: center;
+}
+.trends-body .goal-box
+{
+    border-bottom: 3px solid #efefef;
+    border-right: 1px solid #f3f0f0;
+    border-left: 1px solid #f0f0f0;
+}

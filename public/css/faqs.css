@@ -1,0 +1,28 @@
+
+#faqs_page{
+    background-color: #FAFAFA;
+}
+#faqs_page .faqs-heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-weight: bold;
+    background-color: #0F7292;
+    color: white;
+    padding: 3px;
+    font-size: 41px;
+    text-transform: uppercase;
+}
+#faqs_page .container{
+    background-color: #F3F3F3;
+    padding: 10px 50px!important;
+}
+.table-of-contents{
+    list-style: none;
+}
+.table-of-contents a{
+    color: black;
+}
+.article{
+    margin-top: 30px;
+}
