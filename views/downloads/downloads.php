@@ -98,7 +98,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tabs-content profiles" v-show="activeTab=='country'">
+            <div class="tabs-content profiles" v-show="activeTab=='country'" v-if="IsProfile">
                 <div class="tab-content">
                     <button class="download-all" type="button" @click="downloadAllFiles()" v-if="checkedFiles.length>0">
                         <?=$this->Translate('Download');?>

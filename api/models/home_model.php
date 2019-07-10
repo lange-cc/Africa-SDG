@@ -58,9 +58,13 @@ class home_model extends model
         }
 
 
-        $allData['trends'] = $this->db::table('trends')->select('id', 'sdg_name', 'sdg_id', 'value')->where([['country_code', '=', $c_code], ['year', '=', $year], ['lang', '=', $lang]])->get();
-
-
+        $allData['trends']    = $this->db::table('trends')->select('id', 'sdg_name', 'sdg_id', 'value')->where([['country_code', '=', $c_code], ['year', '=', $year], ['lang', '=', $lang]])->get();
+        $file = '../public/Report/'.$year.'/'.$c_code.'.pdf';
+        if(file_exists($file)){
+            $allData['IsProfile'] = true;
+        }else{
+            $allData['IsProfile'] = false;
+        }
         echo json_encode($allData);
     }
 
@@ -832,6 +836,7 @@ class home_model extends model
 
     public function getCounrtyProfile($year, $lang)
     {
+        $reponce = array();
         $data = array();
         $country = $this->db::table('country')->select('id', 'country_name', 'country_sub_reg', 'sdgi_score', 'sdgi_rank', 'rel_aver_index_score', 'country_code')->where([['year', '=', $year], ['lang', '=', $lang]])->orderBy('country_name', 'asc')->get();
         foreach ($country as $key => $value) {
@@ -854,7 +859,14 @@ class home_model extends model
             array_push($data, $row_array);
 
         }
-        echo json_encode($data);
+        $reponce['data'] = $data;
+        $file = '../public/Report/'.$year.'/';
+        if(file_exists($file)){
+            $reponce['IsProfile'] = true;
+        }else{
+            $reponce['IsProfile'] = false;
+        }
+        echo json_encode($reponce);
     }
 
     public function dowloadAllCountryProfile($year)

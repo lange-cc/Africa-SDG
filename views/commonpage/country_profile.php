@@ -57,7 +57,7 @@
                 <div class="country-card-widget chart-section">
                     <div class="row">
                         <div class="col-12">
-                            <a class="btn-download" download :href="'<?= URL ?>Report/<?=$this->year?>/'+country_code+'.pdf'">
+                            <a class="btn-download" v-if="profilePdf" download :href="'<?= URL ?>Report/<?=$this->year?>/'+country_code+'.pdf'">
                                 <span class="fa fa-download"></span>
                                 <span><?=$this->Translate('Download Country Profile');?></span>
                             </a>
@@ -660,5 +660,5 @@
 
 
 <!-- ================ indicator pop-up ========== -->
-<?include('views/commonpage/indicator.php')?>
+<?php include('views/commonpage/indicator.php')?>
 <!-- ================ indicator pop-up ========== -->

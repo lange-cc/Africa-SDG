@@ -21,6 +21,7 @@ var downloads = new Vue({
         reportData: [],
         itemsDisplayed: 8,
         checkedFiles: [],
+        IsProfile:false
     },
     computed: {
         countriesItems(){
@@ -33,8 +34,8 @@ var downloads = new Vue({
             axios.get(
                 apiUrl + 'CounrtyProfile'
             ).then(function (response) {
-                vm.countryProfileData = response.data;
-                console.log(response.data);
+                vm.countryProfileData = response.data.data;
+                vm.IsProfile = response.data.IsProfile;
             }).catch(function (response) {
                 alert('An error occurred!')
             })
@@ -48,7 +49,7 @@ var downloads = new Vue({
                 }
             ).then(function (response) {
                 vm.reportData = response.data;
-                console.log(response.data);
+               
             }).catch(function (response) {
                 alert('An error occurred!')
             })
@@ -62,7 +63,7 @@ var downloads = new Vue({
                 }
             ).then(function (response) {
                 vm.data = response.data;
-                console.log(response.data);
+              
             }).catch(function (response) {
                 alert('An error occurred!')
             })

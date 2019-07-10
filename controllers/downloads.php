@@ -16,6 +16,7 @@ class downloads extends controller
 
     public function autoload()
     {
+        $this->view->isYear  = true;
         $this->view->title  = $this->Translate('Downloads | Africa SDG Index and Dashboards');
         $this->view->render('downloads/downloads',false,$menu='report');
 //		$this->statistics('Dashboard');

@@ -797,5 +797,5 @@
 </div>
 
 <!-- ========== country profile pop-up ========== -->
-<? include('views/commonpage/country_profile.php') ?>
+<?php include('views/commonpage/country_profile.php') ?>
 <!-- ========== country profile pop-up ========== -->

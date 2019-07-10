@@ -1,12 +1,12 @@
 <!-- ========== country profile pop-up ========== -->
-<? include('views/commonpage/loading.php') ?>
+<?php include('views/commonpage/loading.php') ?>
 <!-- ========== country profile pop-up ========== -->
 
 <?php
   if(isset($this->isYear)) {
     if($this->isYear) {
 ?>
-<span  class="year-widget" v-on:mouseover ="year_window = true" v-on:mouseleave ="year_window = false"><span class="legend-logo-img">Year</span>
+<span  class="year-widget" v-on:mouseover ="year_window = true" v-on:mouseleave ="year_window = false"><span class="legend-logo-img">Year(<?=$this->year?>)</span>
   <div class="year-window" v-if="year_window">
       <ul>
           <li v-for="data in years"><a href="javascript:void(0)" v-on:click="SelectYear(data.year)">{{data.year}}</a></li>

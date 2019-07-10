@@ -6,7 +6,9 @@ class session
 {
 	public static function init()
 	{
-		session_start();
+		if(session_id() == '') {
+			session_start();
+		}
 	}
 	public static function set($key,$value)
 	{
@@ -21,10 +23,10 @@ class session
 			if(!empty($_SESSION[$key])){
 				return $_SESSION[$key];
 			} else {
-				return false;
+				return null;
 			}
 	  } else {
-		  return false;
+		  return null;
 	  }
 
 

@@ -41,7 +41,7 @@
 
         <div class="col-lg-8">
             <div class="map-preview">
-                <? include('public/images/africa.svg') ?>
+                <?php include('public/images/africa.svg') ?>
             </div>
             <div class="map-tooltip"></div>
             <div class="Map-Controls">
@@ -66,5 +66,5 @@
 <!-- =========== map =========== -->
 
 <!-- ========== country profile pop-up ========== -->
-<?include('views/commonpage/country_profile.php')?>
+<?php include('views/commonpage/country_profile.php')?>
 <!-- ========== country profile pop-up ========== -->

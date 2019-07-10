@@ -47,7 +47,7 @@ else
 {
 //$this->error(0);
 $url = 'errors';
-$this->loadsite($url);
+//$this->loadsite($url);
 
 }
 }
@@ -72,7 +72,7 @@ else
 {
   #no controller available
 $url = 'errors';
-$this->loadsite($url);
+//$this->loadsite($url);
   
 }
 
@@ -108,7 +108,7 @@ else
 {
   //echo "controller not exist";
 $url = 'errors';
-$this->loadsite($url);
+//$this->loadsite($url);
 }
  }
 
@@ -117,7 +117,7 @@ else
 
 //echo "this controller not Exist";
 $url = 'errors';
-$this->loadsite($url);
+//$this->loadsite($url);
 
 }
 } /** end of looding site function */

@@ -30,6 +30,7 @@
     $data = json_decode($this->data);
     foreach ($data as $key => $value) 
     {
+      if ($data[$key]->status == 'exist' ) {
 ?>
           <div class="col-lg-3 " style="padding-bottom: 10px;">
          <div class="sdgcard" style="min-height: 334px;">
@@ -67,6 +68,7 @@
          </div>
        </div>
 <?php
+      }
    }
  }
 ?>

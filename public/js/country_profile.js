@@ -18,6 +18,7 @@ var Profile = new Vue({
             sdgtrenddata: null,
             status: false,
             profileLegend:false,
+            profilePdf:false,
             legend:false,
             percentage: 0,
             chartStart: 'not-active',
@@ -217,6 +218,7 @@ var Profile = new Vue({
                 this.country_region = result.data.country_info[0].region;
                 this.country_code = country_code;
                 this.country_rank = result.data.country_info[0].rank;
+                this.profilePdf = result.data.IsProfile;
                 if (result.data.country_info[0].score == 0) {
                     this.country_score = 'NA';
                     $('#index-score .progress').css({'stroke-dashoffset': '-50.551'});
@@ -295,36 +297,6 @@ var Profile = new Vue({
             this.profileLegend = tooge;
         }
     }
-});
-
-
-var YearApp = new Vue({
-    el: '.year-widget',
-    data: {
-        year_window:false,
-        years:null
-    },
-    mounted() {
-      this.GetYear();
-    },
-    methods: {
-        GetYear: function () {
-            var url = $('#js-site-api').val() + 'getYears';
-            axios.post(url).then(result => {
-                YearApp.years = result.data;
-            });
-        },
-        SelectYear(year){
-            var url = $('#js-site-api').val() + 'SelectYear';
-            axios.post(url,{year:year}).then(result => {
-                if(result.data.status == 'success'){
-                        window.location.reload();
-                }
-            });
-     }
-
-    }
-
 });
 
 

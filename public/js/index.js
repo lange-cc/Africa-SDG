@@ -50,7 +50,7 @@ var app = new Vue({
             return dataTable;
         },
         getProfile:function (code) {
-            console.log(Profile);
+           // console.log(Profile);
             Profile.getProfile(code);
         }
     }

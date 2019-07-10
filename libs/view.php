@@ -13,12 +13,17 @@ class view extends ControllermModel
 
     public function render($name, $noinclude = false, $menu)
     {
+        session::init();
         $this->lang = LANG;
+        if(session::get('year') != null){
+            $this->year = session::get('year');
+        }else{
         if($this->isYearExist(date('Y'))){
              $this->year = date('Y');
          }else{
              $this->year = date('Y')-1;
          }
+        }
        
         if ($noinclude == true) {
             require 'views/' . $name . '.php';

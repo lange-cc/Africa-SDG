@@ -102,3 +102,34 @@ $(document).ready(function () {
     }, 2000);
 
 });
+
+var YearApp = new Vue({
+    el: '.year-widget',
+    data: {
+        year_window:false,
+        years:null
+    },
+    mounted() {
+      this.GetYear();
+    },
+    methods: {
+        GetYear: function () {
+            var url = $('#js-site-api').val() + 'getYears';
+            axios.post(url).then(result => {
+                YearApp.years = result.data;
+            });
+        },
+        SelectYear(year){
+            var url = $('#js-site-api').val() + 'SelectYear';
+            axios.post(url,{year:year}).then(result => {
+                if(result.data.status == 'success'){
+                        window.location.reload();
+                }
+            });
+     }
+
+    }
+
+});
+
+

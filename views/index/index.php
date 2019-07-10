@@ -23,8 +23,8 @@
                 <tr>
                     <th width="300px"><?=$this->Translate('Country');?></th>
                     <th><?=$this->Translate('Region');?></th>
-                    <th class="text-center"><?=$this->Translate('Rank');?>(2018)</th>
-                    <th class="text-center"><?=$this->Translate('Score');?> (2018)</th>
+                    <th class="text-center"><?=$this->Translate('Rank');?>({{year}})</th>
+                    <th class="text-center"><?=$this->Translate('Score');?> ({{year}})</th>
                     <th v-if="nextyeardata == true" class="text-center"><?=$this->Translate('Rank');?> ({{nextyear}})</th>
                     <th v-if="nextyeardata == true" class="text-center"><?=$this->Translate('Score');?> ({{nextyear}})</th>
                 </tr>
@@ -58,5 +58,5 @@
 
 
 <!-- ========== country profile pop-up ========== -->
-<?include('views/commonpage/country_profile.php')?>
+<?php include('views/commonpage/country_profile.php')?>
 <!-- ========== country profile pop-up ========== -->
