@@ -12,14 +12,15 @@ var Profile = new Vue({
             country_region: null,
             country_code: null,
             country_rank: null,
+            country_number: null,
             country_score: 0,
             country_av_score: 0,
             sdgdata: null,
             sdgtrenddata: null,
             status: false,
-            profileLegend:false,
-            profilePdf:false,
-            legend:false,
+            profileLegend: false,
+            profilePdf: false,
+            legend: false,
             percentage: 0,
             chartStart: 'not-active',
             options: {
@@ -46,13 +47,11 @@ var Profile = new Vue({
                             var bgcolor2 = data.datasets[tooltipItems.datasetIndex].backgroundColor[9];
                             var value = tooltipItems.yLabel;
                             if (bgcolor == 'rgba(162,164, 166, 0.7)' && value == 100) {
-                                return  'SDG' + (tooltipItems.index+1) + ':NA';
-                            }
-                            else if (bgcolor2 == 'rgba(162,164, 166, 0.7)' && value == 100) {
-                                return  'SDG' + (tooltipItems.index+1) + ':NA';
-                            }
-                            else {
-                                return 'SDG' + (tooltipItems.index+1) + ':' + tooltipItems.yLabel;
+                                return 'SDG' + (tooltipItems.index + 1) + ':NA';
+                            } else if (bgcolor2 == 'rgba(162,164, 166, 0.7)' && value == 100) {
+                                return 'SDG' + (tooltipItems.index + 1) + ':NA';
+                            } else {
+                                return 'SDG' + (tooltipItems.index + 1) + ':' + tooltipItems.yLabel;
                             }
 
                         }
@@ -108,7 +107,8 @@ var Profile = new Vue({
             var canvas = document.getElementById('sdg-chart-labels');
             var chart_canvas = document.getElementById('sdg-chart');
 
-            var radius = 140, radians = 0;
+            var radius = 140,
+                radians = 0;
 
             var ctx = canvas.getContext("2d");
             ctx.font = '12px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"';
@@ -182,8 +182,7 @@ var Profile = new Vue({
                     $zoomRange: $('.zoom-range'),
 
                 });
-            }
-            else {
+            } else {
                 return false;
             }
         },
@@ -193,8 +192,7 @@ var Profile = new Vue({
             // Get event on made on map
             if (this.panzoom() != false) {
                 this.panzoom().on('panzoomend', function (e, panzoom, matrix, changed) {
-                    if (changed) {
-                    } else {
+                    if (changed) {} else {
                         if ($(e.originalEvent.target).attr('data-code')) {
                             var country_code = $(e.originalEvent.target).data('code');
                             fanctions.sendDataOnProfile(country_code);
@@ -206,32 +204,40 @@ var Profile = new Vue({
         loadPopUp: function () {
             this.legend = true;
             $('.country-profile-modal,.overlay').show();
-            $('body').css({'overflow-y': 'hidden'});
+            $('body').css({
+                'overflow-y': 'hidden'
+            });
         },
         getProfile: function (country_code) {
             this.sendDataOnProfile(country_code);
         },
         sendDataOnProfile: function (country_code) {
             loading.showloading();
-            axios.post(url, {country: country_code}).then(result => {
+            axios.post(url, {
+                country: country_code
+            }).then(result => {
                 this.country_name = result.data.country_info[0].name;
                 this.country_region = result.data.country_info[0].region;
                 this.country_code = country_code;
                 this.country_rank = result.data.country_info[0].rank;
+                this.country_number = result.data.country_info[0].country_number;
                 this.profilePdf = result.data.IsProfile;
+
                 if (result.data.country_info[0].score == 0) {
                     this.country_score = 'NA';
-                    $('#index-score .progress').css({'stroke-dashoffset': '-50.551'});
-                }
-                else {
+                    $('#index-score .progress').css({
+                        'stroke-dashoffset': '-50.551'
+                    });
+                } else {
                     this.country_score = result.data.country_info[0].score;
                 }
 
                 if (result.data.country_info[0].avarage_index_score == 0) {
                     this.country_av_score = 'NA';
-                    $('#average-score .progress').css({'stroke-dashoffset': '-50.551'});
-                }
-                else {
+                    $('#average-score .progress').css({
+                        'stroke-dashoffset': '-50.551'
+                    });
+                } else {
                     this.country_av_score = result.data.country_info[0].avarage_index_score;
                 }
 
@@ -252,19 +258,16 @@ var Profile = new Vue({
                         value.push(100);
                         bgcolor.push('rgba(162,164, 166, 0.7)');
                     }
-                }
-                else {
+                } else {
 
                     for (let index = 0; index < this.sdgdata.length; ++index) {
                         if (index == 13 && this.sdgdata[index].value == 44.2 && this.sdgdata[index].color == 'gray') {
                             value.push(100);
                             bgcolor.push('rgba(162,164, 166, 0.7)');
-                        }
-                        else if (this.sdgdata[index].color == 'gray' && index == 9) {
+                        } else if (this.sdgdata[index].color == 'gray' && index == 9) {
                             value.push(100);
                             bgcolor.push('rgba(162,164, 166, 0.7)');
-                        }
-                        else {
+                        } else {
                             value.push(this.sdgdata[index].value);
                             bgcolor.push('rgba(171,214, 255, 0.7)');
                         }
@@ -298,13 +301,3 @@ var Profile = new Vue({
         }
     }
 });
-
-
-
-
-
-
-
-
-
-

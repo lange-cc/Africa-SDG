@@ -4,7 +4,7 @@ $actual_link  = rtrim($actual_link,'/');
 
 $local = true;
 if ($local == true) {
-	$actual_link .= '/lange/sdg';
+	$actual_link .= '/sdg';
 }
 else
 {

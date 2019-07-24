@@ -26,7 +26,7 @@ class home_model extends model
         $allData = array();
         $allData['country_info'] = array();
         $data = $this->db::table('country')->select('id', 'country_name', 'country_sub_reg', 'sdgi_score', 'sdgi_rank', 'rel_aver_index_score')->where([['country_code', '=', $c_code], ['year', '=', $year], ['lang', '=', $lang]])->get();
-
+        $country_number = $this->db::table('country')->select('id', 'country_name', 'country_sub_reg', 'sdgi_score', 'sdgi_rank', 'rel_aver_index_score')->where([['year', '=', $year], ['lang', '=', $lang]])->count();
         foreach ($data as $index => $value) {
             $new_array = array();
             $new_array['name'] = $data[$index]->country_name;
@@ -36,8 +36,10 @@ class home_model extends model
             } else {
                 $new_array['rank'] = $data[$index]->sdgi_rank;
             }
+
             $new_array['score'] = $this->getTruncatedValue($data[$index]->sdgi_score, 1);
             $new_array['avarage_index_score'] = $this->getTruncatedValue($data[$index]->rel_aver_index_score, 1);
+            $new_array['country_number'] =  $country_number;
             array_push($allData['country_info'], $new_array);
         }
 
