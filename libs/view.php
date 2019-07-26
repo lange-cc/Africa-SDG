@@ -6,7 +6,7 @@
 
 class view extends ControllermModel
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
@@ -15,16 +15,17 @@ class view extends ControllermModel
     {
         session::init();
         $this->lang = LANG;
-        if(session::get('year') != null){
+        if (session::get('year') != null) {
             $this->year = session::get('year');
-        }else{
-        if($this->isYearExist(date('Y'))){
-             $this->year = date('Y');
-         }else{
-             $this->year = date('Y')-1;
-         }
+        } else {
+            if ($this->isYearExist(date('Y'))) {
+                $this->year = date('Y');
+            } else {
+                $this->year = date('Y') - 1;
+            }
+            session::set('year', $this->year);
         }
-       
+
         if ($noinclude == true) {
             require 'views/' . $name . '.php';
         } else {
@@ -94,5 +95,3 @@ class view extends ControllermModel
     }
 
 }
-
-?>
