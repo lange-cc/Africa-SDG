@@ -1,48 +1,57 @@
 <?php
 /**
-* 
-*/
+ *
+ */
 class session
 {
-	public static function init()
-	{
-		session_start();
-		return true;
-	}
-	public function set($key,$value)
-	{
-       $_SESSION[$key] = $value;
-       return true;
-	}
+    public static function init()
+    {
+        if (session_id() == '') {
+            session_start();
+        }
+    }
+    public static function set($key, $value)
+    {
+        $_SESSION[$key] = $value;
+    }
 
-	public function unset($key)
-	{
-      unset($_SESSION[$key]);
-      return true;
-	}
+    public static function get($key)
+    {
+        if (isset($_SESSION[$key])) {
+            if (!empty($_SESSION[$key])) {
+                return $_SESSION[$key];
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
 
-	public function get($key)
-	{
-		if (isset($_SESSION[$key])) {
-			if (!empty($_SESSION[$key])) {
-				return $_SESSION[$key];
-			}
-			else
-			{
-				return false;
-			}
-		}
-		else
-		{
-			return false;
-		}	
-	}
-	
-	public function destroy()
-	{
-		session_destroy();
-		return true;
-	}
+    }
+
+    public static function check($key)
+    {
+        if (isset($_SESSION[$key])) {
+            if (!empty($_SESSION[$key])) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+
+    }
+
+    function unset($key) {
+        if (isset($_SESSION[$key])) {
+            unset($_SESSION[$key]);
+        }
+
+    }
+
+    public static function destroy()
+    {
+        session_destroy();
+    }
 }
-
-?>

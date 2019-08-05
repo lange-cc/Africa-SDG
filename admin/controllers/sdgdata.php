@@ -1,6 +1,5 @@
 <?php
 
-use PhpOffice\PhpSpreadsheet\Helper\Sample;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 /**
@@ -8,10 +7,10 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
  */
 class sdgdata extends controller
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
-        session:: init();
+        session::init();
         $loged = session::get('username');
         if ($loged == false) {
             session::destroy();
@@ -44,14 +43,13 @@ class sdgdata extends controller
         if (session::get('sdgyear') != false && session::get('sdglang') != false) {
             $year = session::get('sdgyear');
             $lang = session::get('sdglang');
-            $this->dataupload($DBsave = false, $randomName = false, '/public/excel/' .$lang.'/' . $year . '/');
+            $this->dataupload($DBsave = false, $randomName = false, '/public/excel/' . $lang . '/' . $year . '/');
         } else {
             $lang = session::get('sdglang');
-            $this->dataupload($DBsave = false, $randomName = false, '/public/excel/' .$lang.'/'. date('Y') . '/');
+            $this->dataupload($DBsave = false, $randomName = false, '/public/excel/' . $lang . '/' . date('Y') . '/');
         }
 
     }
-
 
     public function getValue($data, $key)
     {
@@ -72,7 +70,6 @@ class sdgdata extends controller
 
     }
 
-
     public function getSdg($indicator)
     {
         $data = explode('_', $indicator);
@@ -87,7 +84,6 @@ class sdgdata extends controller
         return $value;
     }
 
-
     public function mainfileupload()
     {
 
@@ -98,12 +94,11 @@ class sdgdata extends controller
         }
         $lang = session::get('sdglang');
 
-        $inputFileName = 'public/excel/'.$lang.'/'. $year . '/Indicators-Ratings-values.xlsx';
+        $inputFileName = 'public/excel/' . $lang . '/' . $year . '/Indicators-Ratings-values.xlsx';
         $spreadsheet = IOFactory::load($inputFileName);
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, false, false, false);
 
         $data = json_decode(json_encode($sheetData));
-
 
         $indica = array();
 
@@ -116,7 +111,6 @@ class sdgdata extends controller
             }
 
         }
-
 
         $all_data = array();
 
@@ -132,7 +126,6 @@ class sdgdata extends controller
 
                 foreach ($indicators as $ind_key => $dshjg) {
 
-
                     $validname = explode('_', $indicators[$ind_key]);
                     if (isset($validname[2])) {
                         $name = $validname[2];
@@ -140,41 +133,48 @@ class sdgdata extends controller
                         $name = 'none';
                     }
 
-
                     if ($name != 'color') {
                         $row_array = array();
                         $row_array['country'] = $country;
 
                         $row_array['indicator'] = $indicators[$ind_key];
 
-                        if ($values[$ind_key + 1] == '') {
+                        if (isset($values[$ind_key + 1])) {
+                            if ($values[$ind_key + 1] == '') {
+                                $row_array['color'] = 'none';
+                                $color = 'none';
+                            } else {
+                                $row_array['color'] = $values[$ind_key + 1];
+                                $color = $values[$ind_key + 1];
+                            }
+                        } else {
                             $row_array['color'] = 'none';
                             $color = 'none';
-                        } else {
-                            $row_array['color'] = $values[$ind_key + 1];
-                            $color = $values[$ind_key + 1];
                         }
 
-                        if ($values[$ind_key] == '' && $values[$ind_key + 1] != '') {
+                        if (isset($values[$ind_key + 1])) {
+                            if ($values[$ind_key] == '' && $values[$ind_key + 1] != '') {
+                                $row_array['value'] = "-";
+                                $valuedata = "-";
+                            } else if ($values[$ind_key] == '') {
+                                $row_array['value'] = '';
+                                $valuedata = '';
+                            } else if ($values[$ind_key] == 0) {
+                                $row_array['value'] = 0;
+                                $valuedata = 0;
+                            } else {
+                                $row_array['value'] = $values[$ind_key];
+                                $valuedata = $values[$ind_key];
+                            }
+                        } else {
                             $row_array['value'] = "-";
                             $valuedata = "-";
-                        } else if ($values[$ind_key] == '') {
-                            $row_array['value'] = '';
-                            $valuedata = '';
-                        } else if ($values[$ind_key] == 0) {
-                            $row_array['value'] = 0;
-                            $valuedata = 0;
-                        } else {
-                            $row_array['value'] = $values[$ind_key];
-                            $valuedata = $values[$ind_key];
                         }
 
                         $row_array['sdg'] = $this->getSdg($indicators[$ind_key]);
 
-
                         $indicator = $indicators[$ind_key];
                         $sdg = $this->getSdg($indicators[$ind_key]);
-
 
                         $this->model->savedata($country, $sdg, $color, $indicator, $valuedata, $year, $lang);
 
@@ -189,14 +189,12 @@ class sdgdata extends controller
             }
         }
 
-
 //  header('Access-Control-Allow-Origin: *');
-//  header("Access-Control-Allow-Headers: Content-type");
-//  header("Content-type: application/json");
-//  echo json_encode($all_data);
+        //  header("Access-Control-Allow-Headers: Content-type");
+        //  header("Content-type: application/json");
+        //  echo json_encode($all_data);
 
     }
-
 
     public function Score_ranking()
     {
@@ -207,12 +205,11 @@ class sdgdata extends controller
         }
         $lang = session::get('sdglang');
 
-        $inputFileName = 'public/excel/'.$lang.'/' . $year . '/Ranking.xlsx';
+        $inputFileName = 'public/excel/' . $lang . '/' . $year . '/Ranking.xlsx';
         $spreadsheet = IOFactory::load($inputFileName);
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, false, false, false);
 
         $data = json_decode(json_encode($sheetData));
-
 
         $all_data = array();
 
@@ -222,9 +219,9 @@ class sdgdata extends controller
 
                 $country = $data[$key][0];
                 $country_code = $data[$key][1];
-                $sdgi_score = number_format((float)$data[$key][2], 2, '.', '');
+                $sdgi_score = number_format((float) $data[$key][2], 2, '.', '');
                 $sdgi_rank = $data[$key][3];
-                $rel_aver_index_score = number_format((float)$data[$key][4], 2, '.', '');
+                $rel_aver_index_score = number_format((float) $data[$key][4], 2, '.', '');
                 $country_sub_reg = $data[$key][5];
 
                 $row_array = array();
@@ -244,9 +241,7 @@ class sdgdata extends controller
 
 //echo json_encode($all_data);
 
-
     }
-
 
     public function lebels()
     {
@@ -257,7 +252,7 @@ class sdgdata extends controller
         }
         $lang = session::get('sdglang');
 
-        $inputFileName = 'public/excel/'.$lang.'/' . $year . '/Indicators-Labels.xlsx';
+        $inputFileName = 'public/excel/' . $lang . '/' . $year . '/Indicators-Labels.xlsx';
         $spreadsheet = IOFactory::load($inputFileName);
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, false, false, false);
         $data = json_decode(json_encode($sheetData));
@@ -273,7 +268,6 @@ class sdgdata extends controller
 
                 $row_array = array();
                 $row_array['abrev'] = $abrev;
-
 
                 if (strpos($label, 'SO2') !== false) {
                     $text = str_replace('SO2', 'SO<sub>2</sub>', $label);
@@ -296,7 +290,6 @@ class sdgdata extends controller
                     $label = $label;
                 }
 
-
                 $this->model->saveindicatordata($abrev, $label, $year, $lang);
 
                 array_push($all_data, $row_array);
@@ -311,7 +304,6 @@ class sdgdata extends controller
 
     }
 
-
     public function ProcessSdgPerfmance()
     {
         if (session::get('sdgyear') != false) {
@@ -321,12 +313,11 @@ class sdgdata extends controller
         }
         $lang = session::get('sdglang');
 
-        $inputFileName = 'public/excel/'.$lang.'/' . $year . '/Average-perfomance.xlsx';
+        $inputFileName = 'public/excel/' . $lang . '/' . $year . '/Average-perfomance.xlsx';
         $spreadsheet = IOFactory::load($inputFileName);
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, false, false, false);
 
         $data = json_decode(json_encode($sheetData));
-
 
         $indica = array();
 
@@ -339,7 +330,6 @@ class sdgdata extends controller
             }
 
         }
-
 
         $all_data = array();
 
@@ -362,12 +352,11 @@ class sdgdata extends controller
                         $row_array['value'] = 0;
                         $valuedata = 0;
                     } else {
-                        $row_array['value'] = number_format((float)$values[$ind_key], 2, '.', '');
-                        $valuedata = number_format((float)$values[$ind_key], 2, '.', '');
+                        $row_array['value'] = number_format((float) $values[$ind_key], 2, '.', '');
+                        $valuedata = number_format((float) $values[$ind_key], 2, '.', '');
                     }
 
                     $row_array['sdg'] = $this->getSdg($indicators[$ind_key]);
-
 
                     $indicator = $indicators[$ind_key];
                     $sdg = $this->getSdg($indicators[$ind_key]);
@@ -383,7 +372,6 @@ class sdgdata extends controller
         }
     }
 
-
     public function ProcessSdgcolor()
     {
         if (session::get('sdgyear') != false) {
@@ -393,12 +381,11 @@ class sdgdata extends controller
         }
         $lang = session::get('sdglang');
 
-        $inputFileName = 'public/excel/'.$lang.'/' . $year . '/SDGs-Rating-colors.xlsx';
+        $inputFileName = 'public/excel/' . $lang . '/' . $year . '/SDGs-Rating-colors.xlsx';
         $spreadsheet = IOFactory::load($inputFileName);
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, false, false, false);
 
         $data = json_decode(json_encode($sheetData));
-
 
         $indica = array();
 
@@ -411,7 +398,6 @@ class sdgdata extends controller
             }
 
         }
-
 
         $all_data = array();
 
@@ -433,13 +419,10 @@ class sdgdata extends controller
                     $row_array['color'] = $values[$ind_key];
                     $valuedata = $values[$ind_key];
 
-
                     $row_array['sdg'] = $this->getSdgTrends($indicators[$ind_key]);
-
 
                     $indicator = $indicators[$ind_key];
                     $sdg = $this->getSdgTrends($indicators[$ind_key]);
-
 
                     $this->model->ProcessSdgcolordata($country, $sdg, $valuedata, $year, $lang);
 
@@ -451,9 +434,7 @@ class sdgdata extends controller
             }
         }
 
-
     }
-
 
     public function ProcessTrends()
     {
@@ -463,12 +444,11 @@ class sdgdata extends controller
             $year = date('Y');
         }
         $lang = session::get('sdglang');
-        $inputFileName = 'public/excel/'.$lang.'/' . $year . '/SDGs-Trends.xlsx';
+        $inputFileName = 'public/excel/' . $lang . '/' . $year . '/SDGs-Trends.xlsx';
         $spreadsheet = IOFactory::load($inputFileName);
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, false, false, false);
 
         $data = json_decode(json_encode($sheetData));
-
 
         $indica = array();
 
@@ -481,7 +461,6 @@ class sdgdata extends controller
             }
 
         }
-
 
         $all_data = array();
 
@@ -504,12 +483,11 @@ class sdgdata extends controller
                         $row_array['value'] = '';
                         $valuedata = '';
                     } else {
-                        $row_array['value'] = number_format((float)$values[$ind_key], 2, '.', '');
-                        $valuedata = number_format((float)$values[$ind_key], 2, '.', '');
+                        $row_array['value'] = number_format((float) $values[$ind_key], 2, '.', '');
+                        $valuedata = number_format((float) $values[$ind_key], 2, '.', '');
                     }
 
                     $row_array['sdg'] = $this->getSdgTrends($indicators[$ind_key]);
-
 
                     $indicator = $indicators[$ind_key];
                     $sdg = $this->getSdgTrends($indicators[$ind_key]);
@@ -523,7 +501,6 @@ class sdgdata extends controller
 
             }
         }
-
 
     }
 
@@ -546,7 +523,6 @@ class sdgdata extends controller
             $name .= $test1 = $data[$i] . '_';
         }
 
-
         return trim($name, '_');
     }
 
@@ -559,12 +535,11 @@ class sdgdata extends controller
         }
         $lang = session::get('sdglang');
 
-        $inputFileName = 'public/excel/' .$lang.'/'. $year . '/Indicators-Trends.xlsx';
+        $inputFileName = 'public/excel/' . $lang . '/' . $year . '/Indicators-Trends.xlsx';
         $spreadsheet = IOFactory::load($inputFileName);
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, false, false, false);
 
         $data = json_decode(json_encode($sheetData));
-
 
         $indica = array();
 
@@ -577,7 +552,6 @@ class sdgdata extends controller
             }
 
         }
-
 
         $all_data = array();
 
@@ -593,7 +567,6 @@ class sdgdata extends controller
 
                 foreach ($indicators as $ind_key => $dshjg) {
 
-
                     $validname = explode('_', $indicators[$ind_key]);
                     if (isset($validname[2])) {
                         $name = $validname[2];
@@ -601,31 +574,26 @@ class sdgdata extends controller
                         $name = 'none';
                     }
 
-
                     $row_array = array();
                     $row_array['country'] = $country;
                     $row_array['indicator'] = $this->GetIndicName($indicators[$ind_key]);
-
 
                     if ($values[$ind_key] == null) {
                         $row_array['value'] = '';
                         $valuedata = '';
                     } else {
-                        $row_array['value'] = number_format((float)$values[$ind_key], 0, '.', '');
-                        $valuedata = number_format((float)$values[$ind_key], 0, '.', '');
+                        $row_array['value'] = number_format((float) $values[$ind_key], 0, '.', '');
+                        $valuedata = number_format((float) $values[$ind_key], 0, '.', '');
                     }
 
                     $row_array['sdg'] = $this->getTrendSdg($indicators[$ind_key]);
 
-
                     $indicator = $this->GetIndicName($indicators[$ind_key]);
                     $sdg = $this->getTrendSdg($indicators[$ind_key]);
-
 
                     $this->model->saveTrendsIndicData($country, $indicator, $valuedata, $sdg, $year, $lang);
 
                     array_push($final, $row_array);
-
 
                 }
 
@@ -638,7 +606,6 @@ class sdgdata extends controller
 
     }
 
-
     public function ProcessAlldata()
     {
         if (session::get('sdgyear') != false) {
@@ -647,7 +614,7 @@ class sdgdata extends controller
             $year = date('Y');
         }
         $lang = session::get('sdglang');
-        $this->model->delMaindata($lang,$year);
+        $this->model->delMaindata($lang, $year);
 
         $this->mainfileupload();
         $this->TrendsIndic();
@@ -657,14 +624,12 @@ class sdgdata extends controller
         $this->ProcessTrends();
         $this->ProcessSdgcolor();
 
-
         $proced = new \stdClass();
         $proced->status = "success";
         $proced->message = "<i>Processing done</i>";
         $myJSON = json_encode($proced);
         echo $myJSON;
     }
-
 
     public function getsdgfileData()
     {
@@ -680,7 +645,6 @@ class sdgdata extends controller
             //do something
         }
     }
-
 
     public function year()
     {
@@ -700,7 +664,6 @@ class sdgdata extends controller
             $this->view->render('sdgdata/index', false, $semenu = 2, $menu = 3);
         }
     }
-
 
     public function lang()
     {
@@ -722,5 +685,3 @@ class sdgdata extends controller
     }
 
 }
-
-
