@@ -6,20 +6,21 @@
 class v1_model extends model
 {
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
-    
+
     public function getCountries($year, $lang)
     {
-         $data = $this->db::table('country')->select('id', 'country_name','country_code','country_sub_reg', 'sdgi_score', 'sdgi_rank', 'rel_aver_index_score')->where([['year', '=', $year], ['lang', '=', $lang]])->get();
-         return $data;
+        $data = $this->db::table('country')->select('id', 'country_name', 'country_code', 'country_sub_reg', 'sdgi_score', 'sdgi_rank', 'rel_aver_index_score')->where([['year', '=', $year], ['lang', '=', $lang]])->get();
+        return $data;
     }
 
-    public function yearExist($year,$lang){
-       if($this->db::table('country')->where([['year', '=', $year], ['lang', '=', $lang]])->count() < 0){
-               return true;
+    public function yearExist($year, $lang)
+    {
+        if ($this->db::table('country')->where([['year', '=', $year], ['lang', '=', $lang]])->count() < 0) {
+            return true;
         };
     }
     public function getYear()
@@ -47,7 +48,6 @@ class v1_model extends model
             array_push($allData['country_info'], $new_array);
         }
 
-
         $allData['sdg'] = array();
         $sdg = $this->db::table('sdgca')->select('id', 'sgdname', 'color', 'value')->where([['country_code', '=', $c_code], ['year', '=', $year], ['lang', '=', $lang]])->get();
 
@@ -63,9 +63,7 @@ class v1_model extends model
             array_push($allData['sdg'], $new_array);
         }
 
-
         $allData['trends'] = $this->db::table('trends')->select('id', 'sdg_name', 'sdg_id', 'value')->where([['country_code', '=', $c_code], ['year', '=', $year], ['lang', '=', $lang]])->get();
-
 
         echo json_encode($allData);
     }
@@ -88,7 +86,6 @@ class v1_model extends model
             $data['reg'] = $reg;
 
             foreach ($sdg as $key => $value) {
-
 
                 if ($sdg[$key]->color == 'yellow') {
                     $data['color_' . $sdg[$key]->sdg_id] = '#efc500';
@@ -136,13 +133,12 @@ class v1_model extends model
     {
         $allData = array();
 
-        $report = $this->db::table('sdg_report')->select('id', 'title', 'file', 'content')->where([['lang', '=', $lang], ['section', '=', $section]])->get();
+        $report = $this->db::table('sdg_report')->select('id', 'title', 'file', 'content')->where([['lang', '=', $lang], ['section', '=', $section]])->orderBy('id', 'desc')->get();
         foreach ($report as $key => $value) {
             $data = array();
             $title = $report[$key]->title;
             $file = $report[$key]->file;
             $id = $report[$key]->id;
-
 
             $data['title'] = $title;
             $data['content'] = $report[$key]->content;
@@ -228,9 +224,7 @@ class v1_model extends model
                 $proced->lang->$language->$wordtext = $keyword;
             }
 
-
         }
-
 
         $myJSON = json_encode($proced);
         echo $myJSON;
@@ -258,7 +252,7 @@ class v1_model extends model
                     'lang_id' => $langId,
                     'keyword' => $text,
                     'keytext' => $key,
-                    'abreviation' => $abreviation
+                    'abreviation' => $abreviation,
                 ]
             );
             $proced = new \stdClass();
@@ -268,9 +262,7 @@ class v1_model extends model
             $myJSON = json_encode($proced);
             echo $myJSON;
 
-
         }
-
 
     }
 
@@ -293,7 +285,7 @@ class v1_model extends model
                 'status' => 0,
                 'type' => 'inbox',
                 'reply_id' => '0',
-                'date' => 'now()'
+                'date' => 'now()',
             ]
         );
 
@@ -312,10 +304,10 @@ class v1_model extends model
 
     public function getRealIpAddr()
     {
-        if (!empty($_SERVER['HTTP_CLIENT_IP']))   //check ip from share internet
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) //check ip from share internet
         {
             $ip = $_SERVER['HTTP_CLIENT_IP'];
-        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   //to check ip is pass from proxy
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) //to check ip is pass from proxy
         {
             $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
         } else {
@@ -331,7 +323,7 @@ class v1_model extends model
             "computer" => array("msie 10", "msie 9", "msie 8", "windows.*firefox", "windows.*chrome", "x11.*chrome", "x11.*firefox", "macintosh.*chrome", "macintosh.*firefox", "opera"),
             "tablet" => array("tablet", "android", "ipad", "tablet.*firefox"),
             "mobile" => array("mobile ", "android.*mobile", "iphone", "ipod", "opera mobi", "opera mini"),
-            "bot" => array("googlebot", "mediapartners-google", "adsbot-google", "duckduckbot", "msnbot", "bingbot", "ask", "facebook", "yahoo", "addthis")
+            "bot" => array("googlebot", "mediapartners-google", "adsbot-google", "duckduckbot", "msnbot", "bingbot", "ask", "facebook", "yahoo", "addthis"),
         );
         foreach ($devicesTypes as $deviceType => $devices) {
             foreach ($devices as $device) {
@@ -382,11 +374,10 @@ class v1_model extends model
                         'page' => $page,
                         'ip' => $this->getRealIpAddr(),
                         'views' => 1,
-                        'referrer' => $referrer
+                        'referrer' => $referrer,
 
                     ]
                 );
-
 
             }
 
@@ -401,7 +392,6 @@ class v1_model extends model
             $cookie_name = "user_id";
             $cookie_value = 'User_' . $this->randomnumber(10);
 
-
             $this->db::table('mvc_status')->insertGetId(
                 [
                     'user_id' => $cookie_value,
@@ -412,7 +402,7 @@ class v1_model extends model
                     'page' => $page,
                     'ip' => $this->getRealIpAddr(),
                     'views' => 1,
-                    'referrer' => $referrer
+                    'referrer' => $referrer,
 
                 ]
             );
@@ -429,17 +419,17 @@ class v1_model extends model
     public function getSdgIndicData($code, $sdg, $year, $lang)
     {
         $alldata = array();
-        $alldata ['country_name'] = $this->db::table('country')->select('id', 'country_name', 'country_sub_reg', 'sdgi_score', 'sdgi_rank', 'rel_aver_index_score')->where([['country_code', '=', $code], ['year', '=', $year], ['lang', '=', $lang]])->get()[0]->country_name;
-        $alldata ['sdg_n'] = $sdg;
-        $alldata ['sdgname'] = $this->db::table('sdg_value')->select('id', 'sdg_name')->where([['sdg_id', '=', $sdg], ['lang', '=', $lang]])->get()[0]->sdg_name;
+        $alldata['country_name'] = $this->db::table('country')->select('id', 'country_name', 'country_sub_reg', 'sdgi_score', 'sdgi_rank', 'rel_aver_index_score')->where([['country_code', '=', $code], ['year', '=', $year], ['lang', '=', $lang]])->get()[0]->country_name;
+        $alldata['sdg_n'] = $sdg;
+        $alldata['sdgname'] = $this->db::table('sdg_value')->select('id', 'sdg_name')->where([['sdg_id', '=', $sdg], ['lang', '=', $lang]])->get()[0]->sdg_name;
 
         if ($this->db::table('sdgca')->select('id', 'color')->where([['sdg_id', '=', $sdg], ['country_code', '=', $code], ['year', '=', $year], ['lang', '=', $lang]])->get()[0]->color == "yellow") {
-            $alldata ['sdgColor'] = '#efc500';
+            $alldata['sdgColor'] = '#efc500';
         } else {
-            $alldata ['sdgColor'] = $this->db::table('sdgca')->select('id', 'color')->where([['sdg_id', '=', $sdg], ['country_code', '=', $code], ['year', '=', $year], ['lang', '=', $lang]])->get()[0]->color;
+            $alldata['sdgColor'] = $this->db::table('sdgca')->select('id', 'color')->where([['sdg_id', '=', $sdg], ['country_code', '=', $code], ['year', '=', $year], ['lang', '=', $lang]])->get()[0]->color;
         }
 
-        $alldata ['indicators'] = array();
+        $alldata['indicators'] = array();
         $indicators = $this->db::table('indicators')->select('id', 'indic_name', 'indic_value', 'color')->where([['country_code', '=', $code], ['sdg', '=', $sdg], ['year', '=', $year], ['lang', '=', $lang]])->get();
 
         foreach ($indicators as $key => $value) {
@@ -463,7 +453,6 @@ class v1_model extends model
                 $a['value'] = $this->getTruncatedValue($indicators[$key]->indic_value, 1);
             }
 
-
             if ($indicators[$key]->color == 'none') {
                 $a['color'] = 'grey';
             } else if ($indicators[$key]->color == 'yellow') {
@@ -472,7 +461,7 @@ class v1_model extends model
                 $a['color'] = $indicators[$key]->color;
             }
 
-            array_push($alldata ['indicators'], $a);
+            array_push($alldata['indicators'], $a);
 
         }
 
@@ -482,19 +471,19 @@ class v1_model extends model
     public function getTrendsIndicData2($code, $sdg, $year, $lang)
     {
         $alldata = array();
-        $alldata ['country_name'] = $this->db::table('country')->select('id', 'country_name', 'country_sub_reg', 'sdgi_score', 'sdgi_rank', 'rel_aver_index_score')->where([['country_code', '=', $code], ['year', '=', $year], ['lang', '=', $lang]])->get()[0]->country_name;
-        $alldata ['sdg_n'] = $sdg;
+        $alldata['country_name'] = $this->db::table('country')->select('id', 'country_name', 'country_sub_reg', 'sdgi_score', 'sdgi_rank', 'rel_aver_index_score')->where([['country_code', '=', $code], ['year', '=', $year], ['lang', '=', $lang]])->get()[0]->country_name;
+        $alldata['sdg_n'] = $sdg;
 
         $sdg_names = $this->db::table('sdg_value')->where([['sdg_id', '=', $sdg], ['lang', '=', $lang]])->get();
-        $alldata ['sdgname'] = $sdg_names->first()->sdg_name;
-        $alldata ['sdgTrendValue'] = $this->db::table('trends')->select('value')->where([['sdg_id', '=', $sdg], ['country_code', '=', $code], ['year', '=', $year], ['lang', '=', $lang]])->get()[0]->value;
+        $alldata['sdgname'] = $sdg_names->first()->sdg_name;
+        $alldata['sdgTrendValue'] = $this->db::table('trends')->select('value')->where([['sdg_id', '=', $sdg], ['country_code', '=', $code], ['year', '=', $year], ['lang', '=', $lang]])->get()[0]->value;
         if ($this->db::table('sdgca')->select('id', 'color')->where([['sdg_id', '=', $sdg], ['country_code', '=', $code], ['year', '=', $year], ['lang', '=', $lang]])->get()[0]->color == "yellow") {
-            $alldata ['sdgColor'] = '#efc500';
+            $alldata['sdgColor'] = '#efc500';
         } else {
-            $alldata ['sdgColor'] = $this->db::table('sdgca')->select('id', 'color')->where([['sdg_id', '=', $sdg], ['country_code', '=', $code], ['year', '=', $year], ['lang', '=', $lang]])->get()[0]->color;
+            $alldata['sdgColor'] = $this->db::table('sdgca')->select('id', 'color')->where([['sdg_id', '=', $sdg], ['country_code', '=', $code], ['year', '=', $year], ['lang', '=', $lang]])->get()[0]->color;
         }
 
-        $alldata ['indicators'] = array();
+        $alldata['indicators'] = array();
         $indicators = $this->db::table('indicators')->select('id', 'indic_name', 'indic_value', 'color')->where([['country_code', '=', $code], ['sdg', '=', $sdg], ['year', '=', $year], ['lang', '=', $lang]])->get();
 
         foreach ($indicators as $key => $value) {
@@ -538,7 +527,7 @@ class v1_model extends model
                 $a['color'] = $indicators[$key]->color;
             }
 
-            array_push($alldata ['indicators'], $a);
+            array_push($alldata['indicators'], $a);
 
         }
         echo json_encode($alldata);
@@ -547,14 +536,13 @@ class v1_model extends model
     public function getTrendsIndicData($code, $sdg, $year, $lang)
     {
         $alldata = array();
-        $alldata ['country_name'] = $this->db::table('country')->select('id', 'country_name', 'country_sub_reg', 'sdgi_score', 'sdgi_rank', 'rel_aver_index_score')->where([['country_code', '=', $code], ['year', '=', $year], ['lang', '=', $lang]])->get()[0]->country_name;
-        $alldata ['sdg_n'] = $sdg;
-        $alldata ['sdgname'] = $this->db::table('sdg_value')->select('id', 'sdg_name')->where([['sdg_id', '=', $sdg]])->get()[0]->sdg_name;
-        $alldata ['sdgTrendValue'] = $this->db::table('trends')->select('value')->where([['sdg_id', '=', $sdg], ['country_code', '=', $code], ['year', '=', $year], ['lang', '=', $lang]])->get()[0]->value;
+        $alldata['country_name'] = $this->db::table('country')->select('id', 'country_name', 'country_sub_reg', 'sdgi_score', 'sdgi_rank', 'rel_aver_index_score')->where([['country_code', '=', $code], ['year', '=', $year], ['lang', '=', $lang]])->get()[0]->country_name;
+        $alldata['sdg_n'] = $sdg;
+        $alldata['sdgname'] = $this->db::table('sdg_value')->select('id', 'sdg_name')->where([['sdg_id', '=', $sdg]])->get()[0]->sdg_name;
+        $alldata['sdgTrendValue'] = $this->db::table('trends')->select('value')->where([['sdg_id', '=', $sdg], ['country_code', '=', $code], ['year', '=', $year], ['lang', '=', $lang]])->get()[0]->value;
 
-        $alldata ['indicators'] = array();
+        $alldata['indicators'] = array();
         $indicators = $this->db::table('trends_indicators')->select('id', 'indic_name', 'indic_value')->where([['country_code', '=', $code], ['sdg', '=', $sdg], ['year', '=', $year], ['lang', '=', $lang]])->get();
-
 
         foreach ($indicators as $key => $value) {
 
@@ -568,7 +556,6 @@ class v1_model extends model
             } else {
                 $a['name'] = $indic_index;
             }
-
 
             if ($indicators[$key]->indic_value == '') {
                 $a['value'] = '';
@@ -584,7 +571,7 @@ class v1_model extends model
                 $a['Realvalue'] = 0;
             }
 
-            array_push($alldata ['indicators'], $a);
+            array_push($alldata['indicators'], $a);
 
         }
 
@@ -612,8 +599,7 @@ class v1_model extends model
         $data = array();
         $section = array();
         $section['country'] = array();
-        $section['countrywithNodata'] = $this->sdgindexWithNodata($year,$lang);
-
+        $section['countrywithNodata'] = $this->sdgindexWithNodata($year, $lang);
 
         $country = $this->db::table('country')->select('id', 'country_name', 'country_code', 'country_sub_reg', 'sdgi_score', 'sdgi_rank', 'rel_aver_index_score')->where([['sdgi_rank', '<>', 0], ['year', '=', $year], ['lang', '=', $lang]])->orderBy('sdgi_rank', 'asc')->get();
         $nextyear = $this->db::table('country')->select('id', 'country_name', 'country_code', 'country_sub_reg', 'sdgi_score', 'sdgi_rank', 'rel_aver_index_score')->where([['sdgi_rank', '<>', 0], ['year', '=', $year + 1], ['lang', '=', $lang]])->orderBy('sdgi_rank', 'asc')->count();
@@ -646,7 +632,7 @@ class v1_model extends model
                 $nextyeardata = $this->db::table('country')->select('id', 'country_name', 'country_code', 'country_sub_reg', 'sdgi_score', 'sdgi_rank', 'rel_aver_index_score')->where([['country_code', '=', $country[$key]->country_code], ['year', '=', $year + 1], ['lang', '=', $lang]])->get();
                 $nextyeardatacount = $this->db::table('country')->select('id', 'country_name', 'country_code', 'country_sub_reg', 'sdgi_score', 'sdgi_rank', 'rel_aver_index_score')->where([['country_code', '=', $country[$key]->country_code], ['year', '=', $year + 1], ['lang', '=', $lang]])->count();
                 if ($nextyeardatacount > 0) {
-                    if ($nextyeardata [0]->sdgi_rank == 0) {
+                    if ($nextyeardata[0]->sdgi_rank == 0) {
                         $row_array['nextYearRank'] = 'NA';
                     } else {
                         $row_array['nextYearRank'] = $nextyeardata[0]->sdgi_rank;
@@ -660,7 +646,6 @@ class v1_model extends model
                 }
 
             }
-
 
             $row_array['sdg'] = array();
 
@@ -725,12 +710,11 @@ class v1_model extends model
                 $row_array['index_score'] = $this->getTruncatedValue($country[$key]->sdgi_score, 1);
             }
 
-
             if ($nextyear) {
                 $nextyeardata = $this->db::table('country')->select('id', 'country_name', 'country_code', 'country_sub_reg', 'sdgi_score', 'sdgi_rank', 'rel_aver_index_score')->where([['country_code', '=', $country[$key]->country_code], ['year', '=', $year + 1], ['lang', '=', $lang]])->get();
                 $nextyeardatacount = $this->db::table('country')->select('id', 'country_name', 'country_code', 'country_sub_reg', 'sdgi_score', 'sdgi_rank', 'rel_aver_index_score')->where([['country_code', '=', $country[$key]->country_code], ['year', '=', $year + 1], ['lang', '=', $lang]])->count();
                 if ($nextyeardatacount > 0) {
-                    if ($nextyeardata [0]->sdgi_rank == 0) {
+                    if ($nextyeardata[0]->sdgi_rank == 0) {
                         $row_array['nextYearRank'] = 'NA';
                     } else {
                         $row_array['nextYearRank'] = $nextyeardata[0]->sdgi_rank;
@@ -747,7 +731,6 @@ class v1_model extends model
                     } else {
                         $row_array['nextYearIndex_score'] = $this->getTruncatedValue($nextyeardata[0]->sdgi_score, 1);
                     }
-
 
                 } else {
                     $row_array['nextYearRank'] = 'NA';
@@ -787,11 +770,11 @@ class v1_model extends model
     public function TrendsAndSdgIndicatorsData($code, $sdg)
     {
         $alldata = array();
-        $alldata ['country'] = $this->db::table('country')->select('id', 'country_name', 'country_sub_reg', 'sdgi_score', 'sdgi_rank', 'rel_aver_index_score')->where([['country_code', '=', $code]])->get();
-        $alldata ['sdg_n'] = $sdg;
-        $alldata ['sdg'] = $this->db::table('sdg_value')->select('id', 'sdg_name')->where([['sdg_id', '=', 'sdg' . $sdg]])->get();
-        $alldata ['sdgColor'] = $this->db::table('sdgca')->select('id', 'color')->where([['sdg_id', '=', 'sdg' . $sdg], ['country_code', '=', $code]])->get();
-        $alldata ['indicators'] = array();
+        $alldata['country'] = $this->db::table('country')->select('id', 'country_name', 'country_sub_reg', 'sdgi_score', 'sdgi_rank', 'rel_aver_index_score')->where([['country_code', '=', $code]])->get();
+        $alldata['sdg_n'] = $sdg;
+        $alldata['sdg'] = $this->db::table('sdg_value')->select('id', 'sdg_name')->where([['sdg_id', '=', 'sdg' . $sdg]])->get();
+        $alldata['sdgColor'] = $this->db::table('sdgca')->select('id', 'color')->where([['sdg_id', '=', 'sdg' . $sdg], ['country_code', '=', $code]])->get();
+        $alldata['indicators'] = array();
         $indicators = $this->db::table('indicators')->select('id', 'indic_name', 'indic_value', 'color')->where([['country_code', '=', $code], ['sdg', '=', 'sdg' . $sdg]])->get();
 
         foreach ($indicators as $key => $value) {
@@ -807,7 +790,6 @@ class v1_model extends model
                 $a['name'] = $indic_index;
             }
 
-
             $indicatorsdata = $this->db::table('trends_indicators')->select('id', 'indic_name', 'indic_value')->where([['indic_name', '=', $indic_index]])->get();
             $indicatorsExist = $this->db::table('trends_indicators')->where([['indic_name', '=', $indic_index]])->count();
 
@@ -817,8 +799,7 @@ class v1_model extends model
                 $a['trend_value'] = '';
             }
 
-
-            $a['value'] = number_format((float)$indicators[$key]->indic_value, 1, '.', '');
+            $a['value'] = number_format((float) $indicators[$key]->indic_value, 1, '.', '');
 
             if ($indicators[$key]->indic_value == 0) {
                 $a['color'] = 'grey';
@@ -828,8 +809,7 @@ class v1_model extends model
                 $a['color'] = $indicators[$key]->color;
             }
 
-
-            array_push($alldata ['indicators'], $a);
+            array_push($alldata['indicators'], $a);
 
         }
 
@@ -842,8 +822,8 @@ class v1_model extends model
         $country = $this->db::table('country')->select('id', 'country_name', 'country_sub_reg', 'sdgi_score', 'sdgi_rank', 'rel_aver_index_score', 'country_code')->where([['year', '=', $year], ['lang', '=', $lang]])->orderBy('country_name', 'asc')->get();
         foreach ($country as $key => $value) {
             $row_array = array();
-            $row_array ['name'] = $country[$key]->country_name;
-            $row_array ['code'] = $country[$key]->country_code;
+            $row_array['name'] = $country[$key]->country_name;
+            $row_array['code'] = $country[$key]->country_code;
 
             if (file_exists('../public/Report/' . $year . '/' . $country[$key]->country_code . ".pdf")) {
                 $source = '../public/Report/' . $year . '/' . $country[$key]->country_code . ".pdf";
@@ -873,7 +853,7 @@ class v1_model extends model
         if (file_exists($path)) {
             unlink($path);
         }
-        if ($zip->open($path, ZipArchive::CREATE) === TRUE) {
+        if ($zip->open($path, ZipArchive::CREATE) === true) {
             $Country = $this->db::table('country')->select('country_code')->get();
 
             foreach ($Country as $key => $value) {
@@ -905,5 +885,3 @@ class v1_model extends model
     }
 
 }
-
-?>

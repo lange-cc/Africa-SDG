@@ -134,7 +134,7 @@ class home_model extends model
     {
         $allData = array();
 
-        $report = $this->db::table('sdg_report')->select('id', 'title', 'file', 'content')->where([['lang', '=', $lang], ['section', '=', $section]])->get();
+        $report = $this->db::table('sdg_report')->select('id', 'title', 'file', 'content')->where([['lang', '=', $lang], ['section', '=', $section]])->orderBy('id', 'desc')->get();
         foreach ($report as $key => $value) {
             $data = array();
             $title = $report[$key]->title;

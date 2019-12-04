@@ -6,7 +6,7 @@
 class sdgreport_model extends model
 {
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
@@ -23,12 +23,12 @@ class sdgreport_model extends model
             'year' => $year,
             'r_index' => $index,
             'section' => $section,
-            'lang' => $lang
+            'lang' => $lang,
         ]);
 
         if ($id != null) {
             if ($lang == 'en') {
-                $proced->status  = "success";
+                $proced->status = "success";
                 $proced->message = "New Report successfully added.";
                 $myJSON = json_encode($proced);
                 echo $myJSON;
@@ -41,12 +41,12 @@ class sdgreport_model extends model
 
         } else {
             if ($lang == 'en') {
-                $proced->status  = "fail";
+                $proced->status = "fail";
                 $proced->message = "Failed to add the report added.";
                 $myJSON = json_encode($proced);
                 echo $myJSON;
             } else {
-                $proced->status  = "fail";
+                $proced->status = "fail";
                 $proced->message = "Failed to add the report added.";
                 $myJSON = json_encode($proced);
                 echo $myJSON;
@@ -55,10 +55,9 @@ class sdgreport_model extends model
         }
     }
 
-
     public function getreportData()
     {
-        $data = $this->dataB::table('sdg_report')->select('id', 'title', 'file', 'content', 'year', 'r_index')->where([['lang', '=', LANG]])->get();
+        $data = $this->dataB::table('sdg_report')->select('id', 'title', 'file', 'content', 'year', 'r_index')->where([['lang', '=', LANG]])->orderBy('id', 'desc')->get();
         return $data;
     }
 
@@ -112,7 +111,6 @@ class sdgreport_model extends model
         }
     }
 
-
     public function copyData($lang)
     {
         $command2 = $this->db->prepare("SELECT * FROM `sdg_report` WHERE lang = 'en' ");
@@ -121,7 +119,6 @@ class sdgreport_model extends model
             $num = 0;
             while ($row2 = $command2->fetch(PDO::FETCH_ASSOC)) {
                 $num = $num + 1;
-
 
                 $id = $row2['id'];
                 $title = $row2['title'];
@@ -133,7 +130,7 @@ class sdgreport_model extends model
                 $command = $this->db->prepare("SELECT * FROM `sdg_report` WHERE lang = :lang AND r_index = :index");
                 $command->execute(array(
                     ':lang' => $lang,
-                    ':index' => $index
+                    ':index' => $index,
                 ));
                 if ($command->rowCount() > 0) {
                     if ($num == $command2->rowCount()) {
@@ -167,7 +164,7 @@ class sdgreport_model extends model
         $id = $this->dataB::table('sdg_report_files')->insertGetId([
             'title' => $title,
             'file_name' => $file,
-            'report_id' => $report_id
+            'report_id' => $report_id,
         ]);
 
         if ($id != null) {
@@ -210,5 +207,3 @@ class sdgreport_model extends model
     }
 
 }
-
-?>
